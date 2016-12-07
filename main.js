@@ -15,7 +15,7 @@ var serverStartTime = moment();
 var PORT = process.env.PORT || 3003;
 var vcapInfo={env: 'dev'};
 if(process.env.VCAP_APPLICATION){
-  vcapInfo = process.env.VCAP_APPLICATION;
+  vcapInfo = JSON.parse(process.env.VCAP_APPLICATION);
 }
 
 //Create express server & socket.io
