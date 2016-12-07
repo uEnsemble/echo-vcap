@@ -1,0 +1,48 @@
+language: node_js
+
+node_js:
+  - "6"
+
+script:
+  - npm test
+
+after_success:
+  - npm run version && npm build
+
+env:
+  global:
+    - BLUEMIX_SPACE="ToddsPlace" BLUEMIX_ORG="ToddTown"
+  matrix:
+
+
+deploy:
+  - provider: cloudfoundry
+    edge: true
+    manifest: manifest-us-stage.yml
+    username: $BLUEMIX_USER
+    password: $BLUEMIX_PASSWORD
+    api: "https://api.ng.bluemix.net"
+    organization: $BLUEMIX_ORG
+    space: $BLUEMIX_SPACE
+    on:
+      branch: staging
+  - provider: cloudfoundry
+    edge: true
+    manifest: manifest-us-prod.yml
+    username: $BLUEMIX_USER
+    password: $BLUEMIX_PASSWORD
+    api: "https://api.ng.bluemix.net"
+    organization: $BLUEMIX_ORG
+    space: $BLUEMIX_SPACE
+    on:
+      branch: master
+  - provider: cloudfoundry
+    edge: true
+    manifest: manifest-uk-prod.yml
+    username: $BLUEMIX_USER
+    password: $BLUEMIX_PASSWORD
+    api: "https://api.eu-gb.bluemix.net"
+    organization: $BLUEMIX_ORG
+    space: $BLUEMIX_SPACE
+    on:
+      branch: master
