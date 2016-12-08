@@ -5,10 +5,10 @@ node_js:
 
 script:
   - npm test
+  - ./debugenv.sh
 
 after_success:
   - npm run version && npm build
-  - echo "tag is $TRAVIS_TAG"
 
 env:
   global:
