@@ -14,7 +14,9 @@ env:
     - BLUEMIX_SPACE="ToddsPlace" BLUEMIX_ORG="ToddTown"
   matrix:
 
-
+before_deploy:
+  - echo $TRAVIS_TAG
+  
 deploy:
   - provider: cloudfoundry
     edge: true
@@ -37,7 +39,7 @@ deploy:
     space: $BLUEMIX_SPACE
     on:
       branch: staging
-      condition: $TRAVIS_TAG = 'beta'
+      condition: $TRAVIS_TAG == 'beta'
   - provider: cloudfoundry
     edge: true
     manifest: manifest-us-prod.yml
