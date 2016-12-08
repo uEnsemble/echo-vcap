@@ -16,7 +16,7 @@ env:
   matrix:
 
 before_deploy:
-  - echo $TRAVIS_TAG
+  - echo "Travis tag == $TRAVIS_TAG"
 
 deploy:
   - provider: cloudfoundry
