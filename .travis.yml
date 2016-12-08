@@ -39,7 +39,7 @@ deploy:
     organization: $BLUEMIX_ORG
     space: $BLUEMIX_SPACE
     on:
-      condition: $TRAVIS_TAG == 'beta'
+      branch: beta
   - provider: cloudfoundry
     edge: true
     manifest: manifest-us-prod.yml
