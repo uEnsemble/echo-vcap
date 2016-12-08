@@ -39,7 +39,6 @@ deploy:
     organization: $BLUEMIX_ORG
     space: $BLUEMIX_SPACE
     on:
-      branch: staging
       condition: $TRAVIS_TAG == 'beta'
   - provider: cloudfoundry
     edge: true
