@@ -8,6 +8,7 @@ script:
 
 after_success:
   - npm run version && npm build
+  - echo "tag is $TRAVIS_TAG"
 
 env:
   global:
@@ -15,8 +16,8 @@ env:
   matrix:
 
 before_deploy:
-  - echo $TRAVIS_TAG
-  
+  - echo "Travis tag == $TRAVIS_TAG"
+
 deploy:
   - provider: cloudfoundry
     edge: true
