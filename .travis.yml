@@ -8,6 +8,7 @@ script:
 
 after_success:
   - npm run version && npm build
+  - echo "tag is $TRAVIS_TAG"
 
 env:
   global:
@@ -16,7 +17,7 @@ env:
 
 before_deploy:
   - echo $TRAVIS_TAG
-  
+
 deploy:
   - provider: cloudfoundry
     edge: true
