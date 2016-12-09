@@ -36,6 +36,7 @@ deploy:
     space: $BLUEMIX_SPACE
     on:
       condition: $TRAVIS_TAG = beta
+      all_branches: true
       #branch: beta        #Travis uses that tag name as the branch name when the build is triggered by a tag.
   - provider: cloudfoundry
     edge: true
