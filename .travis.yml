@@ -15,9 +15,6 @@ env:
     - BLUEMIX_SPACE="ToddsPlace" BLUEMIX_ORG="ToddTown"
   matrix:
 
-before_deploy:
-  - echo "Travis tag == $TRAVIS_TAG"
-
 deploy:
   - provider: cloudfoundry
     edge: true
@@ -29,7 +26,6 @@ deploy:
     space: $BLUEMIX_SPACE
     on:
       branch: staging
-      condition: $TRAVIS_TAG != 'beta'
   - provider: cloudfoundry
     edge: true
     manifest: manifest-us-beta.yml
@@ -39,7 +35,8 @@ deploy:
     organization: $BLUEMIX_ORG
     space: $BLUEMIX_SPACE
     on:
-      branch: beta
+      condition: $TRAVIS_TAG = beta
+      #branch: beta        #Travis uses that tag name as the branch name when the build is triggered by a tag.
   - provider: cloudfoundry
     edge: true
     manifest: manifest-us-prod.yml
