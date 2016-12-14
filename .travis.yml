@@ -5,6 +5,7 @@ node_js:
 
 script:
   - npm test
+  - ./debugenv.sh
 
 after_success:
   - npm run version && npm build
@@ -14,18 +15,42 @@ env:
     - BLUEMIX_SPACE="ToddsPlace" BLUEMIX_ORG="ToddTown"
   matrix:
 
-
 deploy:
+  - deploy:
+    provider: bluemixcf
+    edge:
+      source: adamikingit/dpl
+      branch: master
+    manifest: manifest-us-stage.yml
+    username: $BLUEMIX_USER
+    password: $BLUEMIX_PASSWORD
+    region:   eu-gb
+    organization: $BLUEMIX_ORG
+    space: $BLUEMIX_SPACE
+    on:
+      branch: staging
+  # - provider: cloudfoundry
+  #   edge: true
+  #   manifest: manifest-us-stage.yml
+  #   username: $BLUEMIX_USER
+  #   password: $BLUEMIX_PASSWORD
+  #   api: "https://api.ng.bluemix.net"
+  #   organization: $BLUEMIX_ORG
+  #   space: $BLUEMIX_SPACE
+  #   on:
+  #     branch: staging
   - provider: cloudfoundry
     edge: true
-    manifest: manifest-us-stage.yml
+    manifest: manifest-us-beta.yml
     username: $BLUEMIX_USER
     password: $BLUEMIX_PASSWORD
     api: "https://api.ng.bluemix.net"
     organization: $BLUEMIX_ORG
     space: $BLUEMIX_SPACE
     on:
-      branch: staging
+      condition: $TRAVIS_TAG = beta
+      all_branches: true
+      #branch: beta        #Travis uses that tag name as the branch name when the build is triggered by a tag.
   - provider: cloudfoundry
     edge: true
     manifest: manifest-us-prod.yml
