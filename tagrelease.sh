@@ -3,7 +3,7 @@
 echo "CREATE GIT TAG"
 git config --global user.email "builds@travis-ci.com"
 git config --global user.name "Travis CI"
-export GIT_TAG="build-$TRAVIS_BRANCH-$(date -u "+%Y-%m-%d")-$TRAVIS_BUILD_NUMBER"
+export GIT_TAG=build-$TRAVIS_BRANCH-$(date -u "+%Y-%m-%d")-$TRAVIS_BUILD_NUMBER
 echo -n $GIT_TAG > version
 git commit -a -m "Set build VERSION number to $GIT_TAG"
 git tag $GIT_TAG -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
