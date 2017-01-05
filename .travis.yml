@@ -11,12 +11,23 @@ after_success:
 
 before_deploy:
   - tar -czvf echo-vcap.tz . --exclude "node_modules" --exclude ".git" --exclude "echo-vcap.tz"
-  - env
 
 deploy:
+  - provider: script
+    script: tagrelease.sh
+    skip_cleanup: true
+    on:
+      branches:
+        master
+      except:
+        - /^build-[0-9a-z\-]*/
+
   - provider: releases
     api_key: "$GITHUB_OAUTH_TOKEN"
     file: "echo-vcap.tz"
     skip_cleanup: true
     on:
-      branch: master
+      branches:
+        master
+      except:
+        - /^build-[0-9a-z\-]*/
