@@ -10,7 +10,7 @@ after_success:
   - npm run version && npm build
 
 before_deploy:
-  - tar -czvf echo-vcap.tz . --exclude "node_modules" --exclude ".git" --exclude "echo-vcap.tz"
+  - mkdir tmp && tar -czvf tmp/echo-vcap.tz . --exclude "node_modules" --exclude ".git" --exclude "tmp"
 
 deploy:
   - provider: script
@@ -21,7 +21,7 @@ deploy:
 
   - provider: releases
     api_key: "$GITHUB_OAUTH_TOKEN"
-    file: "echo-vcap.tz"
+    file: "tmp/echo-vcap.tz"
     skip_cleanup: true
     on:
       branch: master
