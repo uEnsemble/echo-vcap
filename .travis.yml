@@ -14,20 +14,14 @@ before_deploy:
 
 deploy:
   - provider: script
-    script: tagrelease.sh
+    script: ./tagrelease.sh
     skip_cleanup: true
     on:
-      branches:
-        master
-      except:
-        - /^build-[0-9a-z\-]*/
+      branch: master
 
   - provider: releases
     api_key: "$GITHUB_OAUTH_TOKEN"
     file: "echo-vcap.tz"
     skip_cleanup: true
     on:
-      branches:
-        master
-      except:
-        - /^build-[0-9a-z\-]*/
+      branch: master

@@ -1,6 +1,9 @@
 #!/bin/sh
 
 echo "CREATE GIT TAG"
+echo "$TRAVIS_BRANCH"
+echo "$TRAVIS_BUILD_NUMBER"
+echo "$TRAVIS_REPO_SLUG"
 git config --global user.email "builds@travis-ci.com"
 git config --global user.name "Travis CI"
 export GIT_TAG=build-$TRAVIS_BRANCH-$(date -u "+%Y-%m-%d")-$TRAVIS_BUILD_NUMBER
