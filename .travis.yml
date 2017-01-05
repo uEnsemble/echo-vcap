@@ -11,6 +11,7 @@ after_success:
 
 before_deploy:
   - tar -czvf echo-vcap.tz . --exclude "node_modules" --exclude ".git" --exclude "echo-vcap.tz"
+  - env
 
 deploy:
   - provider: releases
