@@ -10,7 +10,7 @@ after_success:
   - npm run version && npm build
 
 before_deploy:
-  - mkdir tmp && tar -czvf tmp/echo-vcap.tz . --exclude "node_modules" --exclude ".git" --exclude "tmp"
+  - mkdir -p tmp && tar -czvf tmp/echo-vcap.tz . --exclude "node_modules" --exclude ".git" --exclude "tmp"
 
 deploy:
   - provider: script
