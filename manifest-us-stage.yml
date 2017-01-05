@@ -1,8 +1,0 @@
-applications:
-- path: .
-  memory: 256M
-  instances: 1
-  domain: mybluemix.net
-  name: echo-vcap-stage
-  host: echo-vcap-stage
-  disk_quota: 512M

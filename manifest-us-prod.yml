@@ -3,6 +3,6 @@ applications:
   memory: 256M
   instances: 1
   domain: mybluemix.net
-  name: echo-vcap-prod
-  host: echo-vcap-prod
+  name: echo-vcap
+  host: echo-vcap
   disk_quota: 512M
