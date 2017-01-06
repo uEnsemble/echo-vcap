@@ -16,7 +16,7 @@ after_success:
 
 before_deploy:
   - mkdir -p tmp && tar -czvf tmp/echo-vcap.tz . --exclude "node_modules" --exclude ".git" --exclude "tmp"
-  - tagrelease.sh
+  - ./tagrelease.sh
 
 deploy:
   # - provider: script
