@@ -16,13 +16,14 @@ after_success:
 
 before_deploy:
   - mkdir -p tmp && tar -czvf tmp/echo-vcap.tz . --exclude "node_modules" --exclude ".git" --exclude "tmp"
+  - tagrelease.sh
 
 deploy:
-  - provider: script
-    script: ./tagrelease.sh
-    skip_cleanup: true
-    on:
-      branch: master
+  # - provider: script
+  #   script: ./tagrelease.sh
+  #   skip_cleanup: true
+  #   on:
+  #     branch: master
 
   - provider: releases
     api_key: "$GITHUB_OAUTH_TOKEN"
