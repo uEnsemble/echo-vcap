@@ -13,5 +13,5 @@ export GIT_TAG="build-$TRAVIS_BRANCH-$TAG_DATE-$TRAVIS_BUILD_NUMBER"
 git tag $GIT_TAG -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
 echo "TravisCI build tagged with $GIT_TAG"
 echo "build tagged. Now push to https://<GITHUB_OAUTH_TOKEN>@github.com/$TRAVIS_REPO_SLUG"
-git push --quiet --tags "https://$GITHUB_OAUTH_TOKEN@github.com/$TRAVIS_REPO_SLUG" > /dev/null 2>&1
-echo "tag pushed"
+git push --quiet --tags "https://$GITHUB_OAUTH_TOKEN@github.com/$TRAVIS_REPO_SLUG" >/dev/null 2>&1
+echo "tag $GIT_TAG pushed $?"
