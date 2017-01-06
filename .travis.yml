@@ -19,12 +19,6 @@ before_deploy:
   - ./tagrelease.sh
 
 deploy:
-  # - provider: script
-  #   script: ./tagrelease.sh
-  #   skip_cleanup: true
-  #   on:
-  #     branch: master
-
   - provider: releases
     api_key: "$GITHUB_OAUTH_TOKEN"
     file: "tmp/echo-vcap.tz"
