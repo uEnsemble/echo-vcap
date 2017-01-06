@@ -3,6 +3,11 @@ language: node_js
 node_js:
   - "6"
 
+env:
+  global:
+    - WORKFLOW_NAME="sync_build_join2"
+    - TASK_NAME="build2"
+
 script:
   - npm test
 
@@ -25,3 +30,7 @@ deploy:
     skip_cleanup: true
     on:
       branch: master
+
+after_deploy:
+  - git clone https://github.com/uEnsemble/oneshotConductor.git
+  - cd oneshotConductor && npm install && npm start
