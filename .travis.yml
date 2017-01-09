@@ -18,7 +18,6 @@ after_success:
 before_deploy:
   - mkdir -p tmp && tar -czvf "tmp/$ARTIFACT_NAME" . --exclude "node_modules" --exclude ".git" --exclude "tmp"
   - . ./tagrelease.sh
-  - . export RELEASE_URL="https://github.com/$TRAVIS_REPO_SLUG/releases/download/$GIT_TAG/$ARTIFACT_NAME"
 
 deploy:
   - provider: releases
