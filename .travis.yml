@@ -7,6 +7,7 @@ env:
   global:
     - WORKFLOW_NAME="sync_build_join2"
     - TASK_NAME="build2"
+    - ARTIFACT_NAME="echo-vcap.tz"
 
 script:
   - npm test
@@ -15,17 +16,19 @@ after_success:
   - npm run version && npm build
 
 before_deploy:
-  - mkdir -p tmp && tar -czvf tmp/echo-vcap.tz . --exclude "node_modules" --exclude ".git" --exclude "tmp"
+  - mkdir -p tmp && tar -czvf "tmp/$ARTIFACT_NAME" . --exclude "node_modules" --exclude ".git" --exclude "tmp"
   - ./tagrelease.sh
+  - export RELEASE_URL="https://github.com/$TRAVIS_REPO_SLUG/releases/download/$GIT_TAG/$ARTIFACT_NAME"
 
 deploy:
   - provider: releases
     api_key: "$GITHUB_OAUTH_TOKEN"
-    file: "tmp/echo-vcap.tz"
+    file: "tmp/$ARTIFACT_NAME"
     skip_cleanup: true
     on:
       branch: master
 
 after_deploy:
   - git clone https://github.com/uEnsemble/oneshotConductor.git
+  - echo "published $RELEASE_URL"
   - cd oneshotConductor && npm install && npm start
