@@ -27,7 +27,7 @@ function prettyPrintObject(req, rsp, obj){
     noColor: true
   };
   var responseString= '<pre>' + prettyjson.render(obj, options) + '</pre>';
-  rsp.send(responseString);
+  rsp.send('<p>VCAP_APPLICATION variables: </p>' + responseString);
 }
 
 function startServer(err) {
